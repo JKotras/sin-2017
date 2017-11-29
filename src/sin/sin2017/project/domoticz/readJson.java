@@ -15,7 +15,7 @@ public class readJson{
 
 	 Gson gson;
 
-	public void readJson() throws Exception{
+    public readJson() throws Exception{
 
 		// TODO Auto-generated method stub
         gson = new Gson();
@@ -26,6 +26,7 @@ public class readJson{
         Result result = gson.fromJson(json, Result.class);
 
        // System.out.println(result.termsOfService);
+
         System.out.println(result.Name);
 
 
