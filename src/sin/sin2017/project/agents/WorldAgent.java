@@ -9,5 +9,6 @@ public class WorldAgent extends jade.core.Agent {
         System.out.println("Hi, my programmer");	// :D
 
         readJson xRead = new readJson();
+
     }
 }
