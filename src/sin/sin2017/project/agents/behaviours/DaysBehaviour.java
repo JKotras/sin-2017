@@ -4,16 +4,17 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.FSMBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
+import sin.sin2017.project.agents.WorldAgent;
 
 import java.util.concurrent.TimeUnit;
 
 
 public class DaysBehaviour extends FSMBehaviour{
 
-    private static final String STATE_MORNING = "A";
-    private static final String STATE_AFTERNOON = "B";
-    private static final String STATE_EVENING = "C";
-    private static final String STATE_NINGT = "D";
+    public static final String STATE_MORNING = "A";
+    public static final String STATE_AFTERNOON = "B";
+    public static final String STATE_EVENING = "C";
+    public static final String STATE_NINGT = "D";
 
     public DaysBehaviour() {
         super();
@@ -55,14 +56,10 @@ class PartDayBehaviours extends OneShotBehaviour{
     @Override
     public void action() {
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(WorldAgent.TIMESPEED*6);
         }catch (Exception e){
 
         }
         System.out.println("part");
-    }
-    @Override
-    public int onEnd() {
-        return 1000;
     }
 }
