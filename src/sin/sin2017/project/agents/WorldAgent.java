@@ -1,5 +1,6 @@
 package sin.sin2017.project.agents;
 
+import sin.sin2017.project.agents.behaviours.DaysBehaviour;
 import sin.sin2017.project.domoticz.readJson;
 
 public class WorldAgent extends jade.core.Agent {
@@ -15,6 +16,6 @@ public class WorldAgent extends jade.core.Agent {
             System.err.println(e.getMessage());
             System.err.println(e.getStackTrace().toString());
         }
-
+        addBehaviour(new DaysBehaviour());
     }
 }
