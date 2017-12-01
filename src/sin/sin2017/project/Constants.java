@@ -7,4 +7,6 @@ public interface Constants {
     public static final String LIGHT_WINDOW_ID = "10";
     public static final String LIGHT_TURN_ON = "On";
     public static final String LIGHT_TURN_OFF = "Off";
+
+    public static final String BLINK_ID = "13";
 }

@@ -3,16 +3,17 @@ package sin.sin2017.project.StatusInformations;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import sin.sin2017.project.Status.BlindStatus;
 import sin.sin2017.project.Status.LightsStatus;
+import sin.sin2017.project.agents.BlindAgent;
 import sin.sin2017.project.agents.LightAgent;
 
 import java.io.IOException;
 
-public class LightStatusInfomations extends CyclicBehaviour {
-
+public class BlindStatusInformation extends CyclicBehaviour {
     @Override
     public void action() {
-        LightAgent lightAgent = (LightAgent) myAgent;
+        BlindAgent agent = (BlindAgent) myAgent;
         //TODO get status from domoticz
         //set it into lights statuses
 
@@ -25,7 +26,7 @@ public class LightStatusInfomations extends CyclicBehaviour {
 
             reply.setPerformative(ACLMessage.INFORM);
 
-            LightsStatus status = lightAgent.getLightsStatus();
+            BlindStatus status = agent.getBlindStatus();
             String serialized = null;
 
             try {
