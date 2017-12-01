@@ -18,7 +18,7 @@ public class ChangeState {
         idx = id of the device
         action = switchcmd - can be set 'On' or 'Off' - it's case sensitive
      */
-    public void turnSwitch(int idx, String action) throws Exception{
+    public void turnSwitch(String idx, String action) throws Exception{
 
 
         // TODO : send request to do some action
