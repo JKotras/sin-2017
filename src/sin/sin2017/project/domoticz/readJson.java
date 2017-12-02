@@ -65,7 +65,7 @@ public class readJson{
 
 	/*
         targetIDX = idx of the device, whose state we want to know
-        Can be used for: lights, projector, sunblind
+        Can be used for: lights, projector
 	 */
 	public String getSwitchState(int targetIDX) throws Exception{
 
@@ -85,6 +85,45 @@ public class readJson{
 
         return state;
     }
+
+
+    /*
+        Can be used for: sunblind
+        target IDX = idx of the device, whose state we want to know
+        return: current percentage (integer)
+            value       meaning
+            10      =   0%
+            20      =   20%
+            30      =   40%
+            40      =   60%
+            50      =   80%
+            60      =   100%
+     */
+    public int getPercentage(int targetIDX) throws Exception{
+        String str = null;
+        int percentage = 0;
+
+        String flusha = readUrl(httpPort + "/json.htm?type=devices&filter=light&used=true&order=Name");
+
+        Gson gson = new Gson();
+        Response response = gson.fromJson(flusha, Response.class);
+
+        for (Item i : response.result) {
+
+            if(i.idx == targetIDX){
+                str = i.Status;
+            }
+        }
+
+        str = str.replaceAll("\\D+","");
+        percentage = Integer.parseInt(str);
+
+        return percentage;
+
+
+    }
+
+
 
 
     /*
