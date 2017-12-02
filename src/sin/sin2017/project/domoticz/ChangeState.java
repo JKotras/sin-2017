@@ -36,20 +36,20 @@ public class ChangeState {
        // String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
         String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=20&switchcmd=Off";
 
-        System.out.print("URL: " + rUrl + "\n");
+//        System.out.print("URL: " + rUrl + "\n");
 
         String checkResult = readUrl(rUrl);
 
         Gson gson = new Gson();
         Response response = gson.fromJson(checkResult, Response.class);
 
-        System.out.print("RESPONSE: " + response + "\n");
-        System.out.println("status: " + response.status + "\n");
-
-        if("OK".equals(response.status))
-            System.out.print("It's OK \n");
-        else
-            System.out.print("Error with on/off occurred \n");
+//        System.out.print("RESPONSE: " + response + "\n");
+//        System.out.println("status: " + response.status + "\n");
+//
+//        if("OK".equals(response.status))
+//            System.out.print("It's OK \n");
+//        else
+//            System.out.print("Error with on/off occurred \n");
     }
 
 

@@ -10,4 +10,8 @@ public interface Constants {
 
     public static final String BLIND_ID = "13";
     public static final String PROJECTOR_ID = "23";
+
+    public static final String TIME_ELEMENT_ID = "27";
+
+    public static final String MOTION_SENSOR_ID = "26";
 }

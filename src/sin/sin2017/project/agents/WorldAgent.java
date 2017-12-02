@@ -11,7 +11,8 @@ public class WorldAgent extends jade.core.Agent {
 
     protected readJson xRead;
     protected ChangeState xState;
-    public static int TIMESPEED = 1;
+    //default 1000000 - that mean 1 second = 1000000 microseconds;
+    public static long TIMESPEED = 10000;
     protected AgentContainer agentsContainer;
 
     @Override
@@ -28,15 +29,20 @@ public class WorldAgent extends jade.core.Agent {
 
         try {
             AgentController agent;
-            //AgentController agent = agentsContainer.createNewAgent("DayAgent", DayAgent.class.getCanonicalName(), null);
-            //agent.start();
-
+            //day simulation
+            agent = agentsContainer.createNewAgent("DayAgent", DayAgent.class.getCanonicalName(), null);
+            agent.start();
             //lights
             agent = agentsContainer.createNewAgent("LightAgent", LightAgent.class.getCanonicalName(), null);
             agent.start();
-            //sunBlind
-            agent = agentsContainer.createNewAgent("BlindAgent", BlindAgent.class.getCanonicalName(), null);
+//            //sunBlind
+//            agent = agentsContainer.createNewAgent("BlindAgent", BlindAgent.class.getCanonicalName(), null);
+//            agent.start();
+            //motionSensorAgent
+            agent = agentsContainer.createNewAgent("MotionSensorAgent", MotionSensorAgent.class.getCanonicalName(), null);
             agent.start();
+
+
         }catch (Exception e){
             System.err.println("Agents start faild");
         }
