@@ -3,27 +3,18 @@ package sin.sin2017.project.StatusInformations;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import sin.sin2017.project.Constants;
 import sin.sin2017.project.Status.BlindStatus;
-import sin.sin2017.project.Status.LightsStatus;
+import sin.sin2017.project.Status.ProjectorStatus;
 import sin.sin2017.project.agents.BlindAgent;
-import sin.sin2017.project.agents.LightAgent;
-import sin.sin2017.project.domoticz.readJson;
+import sin.sin2017.project.agents.ProjectorAgent;
 
 import java.io.IOException;
 
-public class BlindStatusInformation extends CyclicBehaviour {
+public class ProjectorStatusInformation extends CyclicBehaviour {
     @Override
     public void action() {
-        BlindAgent agent = (BlindAgent) myAgent;
-        try{
-            readJson readJson = new readJson();
-            String status = readJson.getSwitchState(Integer.parseInt(Constants.BLIND_ID));
-            System.out.println(status);
-        }catch (Exception e){
-            System.err.println("Error in read status");
-        }
-
+        ProjectorAgent agent = (ProjectorAgent) myAgent;
+        //TODO get status from domoticz
         //set it into lights statuses
 
         //replay for requests
@@ -35,7 +26,7 @@ public class BlindStatusInformation extends CyclicBehaviour {
 
             reply.setPerformative(ACLMessage.INFORM);
 
-            BlindStatus status = agent.getBlindStatus();
+            ProjectorStatus status = agent.getProjectorStatus();
             String serialized = null;
 
             try {

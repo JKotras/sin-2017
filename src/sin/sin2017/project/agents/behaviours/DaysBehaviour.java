@@ -61,12 +61,6 @@ class PartDayBehaviours extends OneShotBehaviour{
         }catch (Exception e){
 
         }
-        ChangeState changeState = new ChangeState();
-        try{
-        changeState.turnSwitch("light_11", "on");
-        }catch (Exception e){
-            return;
-        }
         System.out.println("part");
     }
 }

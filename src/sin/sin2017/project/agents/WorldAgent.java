@@ -27,10 +27,18 @@ public class WorldAgent extends jade.core.Agent {
         agentsContainer = Runtime.instance().createAgentContainer(p);
 
         try {
-            AgentController agent = agentsContainer.createNewAgent("DayAgent", DayAgent.class.getCanonicalName(), null);
+            AgentController agent;
+            //AgentController agent = agentsContainer.createNewAgent("DayAgent", DayAgent.class.getCanonicalName(), null);
+            //agent.start();
+
+            //lights
+            agent = agentsContainer.createNewAgent("LightAgent", LightAgent.class.getCanonicalName(), null);
+            agent.start();
+            //sunBlind
+            agent = agentsContainer.createNewAgent("BlindAgent", BlindAgent.class.getCanonicalName(), null);
             agent.start();
         }catch (Exception e){
-            System.err.println("Day agent start faild");
+            System.err.println("Agents start faild");
         }
 
         // just for testing purposes
