@@ -92,14 +92,8 @@ public class readJson{
         Can be used for: sunblind, light level
         target IDX = idx of the device, whose state we want to know
         return: current percentage (integer)
-            value       meaning
-            10      =   0%          10%
-            20      =   20%         30%
-            30      =   40%         50%
-            40      =   60%         65%
-            50      =   80%         80%
-            60      =   100%        100%
-                        sunblind    light-level
+                0 = Off
+                +10 = each additional entry
      */
     public int getPercentage(int targetIDX) throws Exception{
         String str = null;
