@@ -24,6 +24,8 @@ public class readJson{
         Gson gson = new Gson();
         Response response = gson.fromJson(flusha, Response.class);
 
+        System.out.print("==1== RESPONSE: " + response + "\n");
+
         for (Item i : response.result)
             System.out.println("result: " + i.Name + " + " + i.idx + "\n");
 

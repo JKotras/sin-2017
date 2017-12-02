@@ -5,10 +5,12 @@ import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import sin.sin2017.project.domoticz.readJson;
+import sin.sin2017.project.domoticz.ChangeState;
 
 public class WorldAgent extends jade.core.Agent {
 
     protected readJson xRead;
+    protected ChangeState xState;
     public static int TIMESPEED = 1;
     protected AgentContainer agentsContainer;
 
@@ -29,6 +31,14 @@ public class WorldAgent extends jade.core.Agent {
             agent.start();
         }catch (Exception e){
             System.err.println("Day agent start faild");
+        }
+
+        // just for testing purposes
+        try {
+            xState = new ChangeState(20,"On");
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            System.err.println(e.getStackTrace().toString());
         }
 
     }

@@ -10,34 +10,158 @@ import java.util.List;
 import com.google.gson.Gson;
 
 
+/*
+    LIST OF USED SENSORS/SWITCHES
+*   idx     name
+*   2       PC lab 1 - lights
+*   13      sunblind
+*   20      light - blackboard
+*   21      light - middle
+*   22      light - window
+*   23      projector
+*   24      outside temperature
+**/
+
+
 public class ChangeState {
 
-    /*
-        json example of turning a switch on/off:
-        http://127.0.0.1:8080/json.htm?type=command&param=switchlight&idx=9&switchcmd=Off
-        idx = id of the device
-        action = switchcmd - can be set 'On' or 'Off' - it's case sensitive
-     */
-    public void turnSwitch(int idx, String action) throws Exception{
+    String httpPort = "http://127.0.0.1:8080";
 
 
-        // TODO : send request to do some action
 
+    // just for testing purposes
+    public ChangeState(int idx, String action) throws Exception{
+        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
 
-        // check if the action was successful
-        String rUrl = "http://127.0.0.1:8080/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
+        System.out.print("URL: " + rUrl + "\n");
+
         String checkResult = readUrl(rUrl);
 
         Gson gson = new Gson();
         Response response = gson.fromJson(checkResult, Response.class);
 
-        System.out.print(response + "\n");
+        System.out.print("RESPONSE: " + response + "\n");
+        System.out.println("status: " + response.status + "\n");
 
-        for (Item i : response.result)
-            System.out.println("status: " + i.status + "\n");
-
+        if("OK".equals(response.status))
+            System.out.print("It's OK \n");
+        else
+            System.out.print("Error with on/off occurred \n");
     }
 
+
+
+
+    /*
+        Using this command, the lights and projector can be turned on/off:
+        json.htm?type=command&param=switchlight&idx=IDX&switchcmd=CMD
+
+        IDX = id of the device
+        CMD = can be set 'On' or 'Off' - it's case sensitive
+     */
+    public int turnSwitch(int idx, String action) throws Exception{
+
+        // send request to do some action
+        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
+        String checkResult = readUrl(rUrl);
+
+        // check if the action was successful
+        Gson gson = new Gson();
+        Response response = gson.fromJson(checkResult, Response.class);
+
+        if("OK".equals(response.status))
+            return 0;
+        else
+            return 1;
+    }
+
+
+
+
+    /*
+        There is one command for outside temperature and weather with 4 param:
+        /json.htm?type=command&param=udevice&idx=IDX&nvalue=0&svalue=TEMP;BAR;BAR_FOR;ALTITUDE
+
+        IDX = id of the device
+        TEMP = Temperature
+        BAR = Barometric pressure
+        BAR_FOR = Barometer forecast -> 0 = No Info, 1 = Sunny, 2 = Paryly Cloudy
+                                        3 = Cloudy, 4 = Rain
+        ALTITUDE = Not used at the moment, default 0
+
+     */
+    public int setWeather(int idx, int temp, int bar, int bar_for) throws Exception{
+
+        String rUrl = httpPort + "/json.htm?type=command&param=udevice&idx="+ idx +"&nvalue=0&svalue="+ temp +";"+ bar +";"+ bar_for +";0";
+        String checkResult = readUrl(rUrl);
+
+        // check if the action was successful
+        Gson gson = new Gson();
+        Response response = gson.fromJson(checkResult, Response.class);
+
+        if("OK".equals(response.status))
+            return 0;
+        else
+            return 1;
+    }
+
+
+
+    /*
+        With this command, all the lights in lab can be turned on/off:
+        /json.htm?type=command&param=switchscene&idx=IDX&switchcmd=CMD
+
+        IDX = id of the device
+        CMD = On or Off - it's case sensitive
+     */
+    public int setGroup(int idx, String cmd) throws Exception{
+
+        String rUrl = httpPort + "/json.htm?type=command&param=switchscene&idx="+ idx +"&switchcmd=" + cmd;
+        String checkResult = readUrl(rUrl);
+
+        // check if the action was successful
+        Gson gson = new Gson();
+        Response response = gson.fromJson(checkResult, Response.class);
+
+        if("OK".equals(response.status))
+            return 0;
+        else
+            return 1;
+    }
+
+
+
+
+    /*
+        Using this command, the sunblind can be set:
+        /json.htm?type=command&param=switchlight&idx=IDX&switchcmd=Set%20Level&level=LEVEL
+
+        IDX = id of the device
+        LEVEL =  10  - down
+                 20  - 50%
+                 30  - 100%
+                 40  - up
+     */
+    public int setSwitch(int idx, int level) throws Exception{
+
+        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx="+ idx +"&switchcmd=Set%20Level&level=" + level;
+        String checkResult = readUrl(rUrl);
+
+        // check if the action was successful
+        Gson gson = new Gson();
+        Response response = gson.fromJson(checkResult, Response.class);
+
+        if("OK".equals(response.status))
+            return 0;
+        else
+            return 1;
+    }
+
+
+
+    /*
+        urlString = url with json
+     */
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
         try {
@@ -58,17 +182,9 @@ public class ChangeState {
     }
 
 
-    // what we need from response
-    static class Item
-    {
-        String status;
-    }
-
-
     static class Response
     {
         String status;
-        Item[] result;
     }
 
 
