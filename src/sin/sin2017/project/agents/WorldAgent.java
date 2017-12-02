@@ -38,9 +38,15 @@ public class WorldAgent extends jade.core.Agent {
             //sunBlind
             agent = agentsContainer.createNewAgent("BlindAgent", BlindAgent.class.getCanonicalName(), null);
             agent.start();
+            //projector agent
+            agent = agentsContainer.createNewAgent("ProjectorAgent", ProjectorAgent.class.getCanonicalName(), null);
+            agent.start();
             //motionSensorAgent
             agent = agentsContainer.createNewAgent("MotionSensorAgent", MotionSensorAgent.class.getCanonicalName(), null);
             agent.start();
+            //temperature - not fully implemented
+//            agent = agentsContainer.createNewAgent("TemperatureAgent", TemperatureAgent.class.getCanonicalName(), null);
+//            agent.start();
 
 
         }catch (Exception e){
