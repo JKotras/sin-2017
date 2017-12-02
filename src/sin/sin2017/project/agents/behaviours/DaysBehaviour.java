@@ -5,6 +5,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.FSMBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import sin.sin2017.project.agents.WorldAgent;
+import sin.sin2017.project.domoticz.ChangeState;
 
 import java.util.concurrent.TimeUnit;
 
@@ -59,6 +60,12 @@ class PartDayBehaviours extends OneShotBehaviour{
             TimeUnit.SECONDS.sleep(WorldAgent.TIMESPEED*6);
         }catch (Exception e){
 
+        }
+        ChangeState changeState = new ChangeState();
+        try{
+        changeState.turnSwitch("light_11", "on");
+        }catch (Exception e){
+            return;
         }
         System.out.println("part");
     }
