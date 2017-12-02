@@ -11,8 +11,27 @@ import com.google.gson.Gson;
 
 //import sun.management.Agent;
 
+
+/*
+    LIST OF USED SENSORS/SWITCHES
+*   idx     name
+*   2       PC lab 1 - lights
+*   13      sunblind
+*   20      light - blackboard
+*   21      light - middle
+*   22      light - window
+*   23      projector
+*   24      outside temperature
+*   27      text field of simulation time
+**/
+
+
+
 public class readJson{
 
+    String httpPort = "http://127.0.0.1:8080";
+
+    // only for testing purposes
     public readJson() throws Exception{
 
         // only names + idx
@@ -24,17 +43,105 @@ public class readJson{
         Gson gson = new Gson();
         Response response = gson.fromJson(flusha, Response.class);
 
-        System.out.print("==1== RESPONSE: " + response + "\n");
+        //System.out.print("==1== RESPONSE: " + response + "\n");
 
-        for (Item i : response.result)
+        for (Item i : response.result) {
             System.out.println("result: " + i.Name + " + " + i.idx + "\n");
 
-        System.out.println("--------------- \n");
+            if(i.idx == 20){
+                //return i.Status;
+                System.out.println("STATUS: " + i.Status + "\n");
+            }
+
+        }
+
+       /* System.out.println("--------------- \n");
 
         System.out.println("status, title: " + response.status + " + " + response.title + "\n");
-        System.out.println("sunset, sunrise: " + response.Sunset + " + " + response.Sunrise + "\n");
+        System.out.println("sunset, sunrise: " + response.Sunset + " + " + response.Sunrise + "\n");*/
 
 	}
+
+
+	/*
+        targetIDX = idx of the device, whose state we want to know
+        Can be used for: lights, projector, sunblind
+	 */
+	public String getSwitchState(int targetIDX) throws Exception{
+
+	    String state = null;
+        // full data
+        String flusha = readUrl(httpPort + "/json.htm?type=devices&filter=light&used=true&order=Name");
+
+        Gson gson = new Gson();
+        Response response = gson.fromJson(flusha, Response.class);
+
+        for (Item i : response.result) {
+
+            if(i.idx == targetIDX){
+                state = i.Status;
+            }
+        }
+
+        return state;
+    }
+
+
+    /*
+        targetIDX = idx of a device, whose state we want to know
+        whichStatus = which data do you need:   1 - temperature
+                                                2 - weather
+        Can be used for: outside temperature
+     */
+    public String getTemperature(int targetIDX, int whichStatus) throws Exception{
+        String state = null;
+
+        String flusha = readUrl(httpPort + "/json.htm?type=devices&filter=light&used=true&order=Name");
+
+        Gson gson = new Gson();
+        Response response = gson.fromJson(flusha, Response.class);
+
+        for (Item i : response.result) {
+
+            if(i.idx == targetIDX){
+
+                if(whichStatus == 1)
+                    state = i.Data;
+                if(whichStatus == 2)
+                    state = i.ForecastStr;
+            }
+
+        }
+
+        return state;
+    }
+
+
+
+    /*
+        target IDX = idx of a group, whose state we want to know
+        Can be used for: PC lab 1 - lights
+     */
+    public String getGroupState(int targetIDX) throws Exception {
+
+        String state = null;
+
+        String flusha = readUrl(httpPort + "/json.htm?type=scenes");
+
+        Gson gson = new Gson();
+        Response response = gson.fromJson(flusha, Response.class);
+
+        for (Item i : response.result) {
+
+            if(i.idx == targetIDX){
+                state = i.Status;
+            }
+        }
+
+        return state;
+    }
+
+
 
 
     private static String readUrl(String urlString) throws Exception {
@@ -64,6 +171,8 @@ public class readJson{
         String Name;
         String Type;
         String Data;
+        String Status;
+        String ForecastStr;
     }
 
 

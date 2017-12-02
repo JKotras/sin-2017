@@ -34,12 +34,12 @@ public class WorldAgent extends jade.core.Agent {
         }
 
         // just for testing purposes
-        try {
+       /* try {
             xState = new ChangeState(20,"On");
         }catch (Exception e){
             System.err.println(e.getMessage());
             System.err.println(e.getStackTrace().toString());
-        }
+        }*/
 
     }
 

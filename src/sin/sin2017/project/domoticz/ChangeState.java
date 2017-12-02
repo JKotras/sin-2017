@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 *   22      light - window
 *   23      projector
 *   24      outside temperature
+*   27      text field of simulation time
 **/
 
 
@@ -30,8 +31,9 @@ public class ChangeState {
 
 
     // just for testing purposes
-    public ChangeState(int idx, String action) throws Exception{
-        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
+    public ChangeState() throws Exception{
+       // String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
+        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=20&switchcmd=Off";
 
         System.out.print("URL: " + rUrl + "\n");
 
@@ -143,6 +145,31 @@ public class ChangeState {
     public int setSwitch(int idx, int level) throws Exception{
 
         String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx="+ idx +"&switchcmd=Set%20Level&level=" + level;
+        String checkResult = readUrl(rUrl);
+
+        // check if the action was successful
+        Gson gson = new Gson();
+        Response response = gson.fromJson(checkResult, Response.class);
+
+        if("OK".equals(response.status))
+            return 0;
+        else
+            return 1;
+    }
+
+
+
+
+    /*
+        Using this command, the simulation time can be displayed:
+        /json.htm?type=command&param=udevice&idx=IDX&nvalue=0&svalue=TEXT
+
+        IDX = id of the device
+        TEXT = time you want to display
+     */
+    public int setText(int idx, String text) throws Exception{
+
+        String rUrl = httpPort + "/json.htm?type=command&param=udevice&idx="+ idx +"&nvalue=0&svalue=" + text;
         String checkResult = readUrl(rUrl);
 
         // check if the action was successful
