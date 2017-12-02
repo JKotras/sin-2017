@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 *   22      light - window
 *   23      projector
 *   24      outside temperature
+*   26      motion sensor
 *   27      text field of simulation time
 **/
 
@@ -65,7 +66,7 @@ public class readJson{
 
 	/*
         targetIDX = idx of the device, whose state we want to know
-        Can be used for: lights, projector
+        Can be used for: lights, projector, motion sensor
 	 */
 	public String getSwitchState(int targetIDX) throws Exception{
 
