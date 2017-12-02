@@ -13,5 +13,5 @@ public interface Constants {
 
     public static final String TIME_ELEMENT_ID = "27";
 
-    public static final String MOTION_SENSOR_ID = "26";
+    public static final String MOTION_SENSOR_ID = "32";
 }

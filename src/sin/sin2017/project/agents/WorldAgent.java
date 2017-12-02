@@ -35,9 +35,9 @@ public class WorldAgent extends jade.core.Agent {
             //lights
             agent = agentsContainer.createNewAgent("LightAgent", LightAgent.class.getCanonicalName(), null);
             agent.start();
-//            //sunBlind
-//            agent = agentsContainer.createNewAgent("BlindAgent", BlindAgent.class.getCanonicalName(), null);
-//            agent.start();
+            //sunBlind
+            agent = agentsContainer.createNewAgent("BlindAgent", BlindAgent.class.getCanonicalName(), null);
+            agent.start();
             //motionSensorAgent
             agent = agentsContainer.createNewAgent("MotionSensorAgent", MotionSensorAgent.class.getCanonicalName(), null);
             agent.start();
@@ -46,14 +46,6 @@ public class WorldAgent extends jade.core.Agent {
         }catch (Exception e){
             System.err.println("Agents start faild");
         }
-
-        // just for testing purposes
-       /* try {
-            xState = new ChangeState(20,"On");
-        }catch (Exception e){
-            System.err.println(e.getMessage());
-            System.err.println(e.getStackTrace().toString());
-        }*/
 
     }
 

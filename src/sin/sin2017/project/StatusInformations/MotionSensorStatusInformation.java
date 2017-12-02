@@ -24,11 +24,10 @@ public class MotionSensorStatusInformation extends CyclicBehaviour {
             }else{
                 agent.getMotionSensorStatus().isThereAnyone = true;
             }
+            System.out.println(status);
         }catch (Exception e){
             System.err.println("Error in read status");
         }
-
-        //set it into lights statuses
 
         //replay for requests
         MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
