@@ -18,8 +18,8 @@ public class BlindStatusInformation extends CyclicBehaviour {
         BlindAgent agent = (BlindAgent) myAgent;
         try{
             readJson readJson = new readJson();
-            String status = readJson.getSwitchState(Integer.parseInt(Constants.BLIND_ID));
-            System.out.println(status);
+            int percentage = readJson.getPercentage(Integer.parseInt(Constants.BLIND_ID));
+            agent.getBlindStatus().percentageOfClose = percentage;
         }catch (Exception e){
             System.err.println("Error in read status");
         }

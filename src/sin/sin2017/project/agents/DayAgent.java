@@ -1,22 +1,23 @@
 package sin.sin2017.project.agents;
 
 import jade.core.Agent;
-import sin.sin2017.project.Status.DayStatus;
-import sin.sin2017.project.StatusInformations.DayStatusInformation;
-import sin.sin2017.project.agents.behaviours.DaysBehaviour;
+import sin.sin2017.project.Status.TimeStatus;
+import sin.sin2017.project.agents.behaviours.TimeBehaviour;
+import sin.sin2017.project.agents.behaviours.TimeInfoBehaviour;
 
 public class DayAgent extends Agent{
 
-    protected DayStatus dayStatus = new DayStatus();
+    protected TimeStatus timeStatus = new TimeStatus();
+
+    public String dayPart;
 
     @Override
     protected void setup() {
-        System.out.println("Day agent start");
-        addBehaviour(new DaysBehaviour());
-        addBehaviour(new DayStatusInformation());
+        addBehaviour(new TimeBehaviour());
+        addBehaviour(new TimeInfoBehaviour());
     }
 
-    public DayStatus getDayStatus() {
-        return dayStatus;
+    public TimeStatus getTimeStatus() {
+        return timeStatus;
     }
 }
