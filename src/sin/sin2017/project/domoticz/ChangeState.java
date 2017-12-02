@@ -137,10 +137,8 @@ public class ChangeState {
         /json.htm?type=command&param=switchlight&idx=IDX&switchcmd=Set%20Level&level=LEVEL
 
         IDX = id of the device
-        LEVEL =  10  - down
-                 20  - 50%
-                 30  - 100%
-                 40  - up
+        LEVEL =  10  - open
+                 20  - close
      */
     public int setSwitch(int idx, int level) throws Exception{
 
