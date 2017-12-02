@@ -18,9 +18,9 @@ import com.google.gson.Gson;
 *   20      light - blackboard
 *   21      light - middle
 *   22      light - window
-*   23      projector
+*   36      projector
 *   24      outside temperature
-*   26      motion sensor
+*   32      motion sensor
 *   27      text field of simulation time
 **/
 
