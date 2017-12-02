@@ -16,6 +16,7 @@ public class MotionSensorStatusInformation extends CyclicBehaviour {
     @Override
     public void action() {
         MotionSensorAgent agent = (MotionSensorAgent) myAgent;
+        boolean inState = agent.getMotionSensorStatus().isThereAnyone;
         try{
             readJson readJson = new readJson();
             String status = readJson.getSwitchState(Integer.parseInt(Constants.MOTION_SENSOR_ID));
@@ -27,28 +28,29 @@ public class MotionSensorStatusInformation extends CyclicBehaviour {
         }catch (Exception e){
             System.err.println("Error in read status");
         }
+        if(inState != agent.getMotionSensorStatus().isThereAnyone){
+            System.out.println("change");
+            agent.infoOthersMotionChange();
+        }
 
         //replay for requests
         MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
         ACLMessage msg = myAgent.receive(mt);
         if (msg != null) {
 
-            ACLMessage reply = msg.createReply();
-
-            reply.setPerformative(ACLMessage.INFORM);
-
-            MotionSensorStatus status = agent.getMotionSensorStatus();
-            String serialized = null;
-
-            try {
-                serialized = status.serialize();
-            } catch (IOException e) {
-                System.err.println("Error");
+            if(msg.getLanguage() != Constants.NON_REPLY) {
+                ACLMessage reply = msg.createReply();
+                reply.setPerformative(ACLMessage.INFORM);
+                MotionSensorStatus status = agent.getMotionSensorStatus();
+                String serialized = null;
+                try {
+                    serialized = status.serialize();
+                } catch (IOException e) {
+                    System.err.println("Error");
+                }
+                reply.setContent(serialized);
+                myAgent.send(reply);
             }
-
-            reply.setContent(serialized);
-
-            myAgent.send(reply);
         }
     }
 }

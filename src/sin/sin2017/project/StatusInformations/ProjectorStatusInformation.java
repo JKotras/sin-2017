@@ -20,6 +20,11 @@ public class ProjectorStatusInformation extends CyclicBehaviour {
             readJson readJson = new readJson();
             String status = readJson.getSwitchState(Integer.parseInt(Constants.PROJECTOR_ID));
             agent.getProjectorStatus().status = status;
+            if(status.compareTo(Constants.LIGHT_TURN_OFF) == 0) {
+                agent.getProjectorStatus().status = Constants.LIGHT_TURN_OFF;
+            }else{
+                agent.getProjectorStatus().status = Constants.LIGHT_TURN_ON;
+            }
         }catch (Exception e){
             System.err.println("Error in read status");
         }
@@ -29,22 +34,19 @@ public class ProjectorStatusInformation extends CyclicBehaviour {
         ACLMessage msg = myAgent.receive(mt);
         if (msg != null) {
 
-            ACLMessage reply = msg.createReply();
-
-            reply.setPerformative(ACLMessage.INFORM);
-
-            ProjectorStatus status = agent.getProjectorStatus();
-            String serialized = null;
-
-            try {
-                serialized = status.serialize();
-            } catch (IOException e) {
-                System.err.println("Error");
+            if(msg.getLanguage() != Constants.NON_REPLY) {
+                ACLMessage reply = msg.createReply();
+                reply.setPerformative(ACLMessage.INFORM);
+                ProjectorStatus status = agent.getProjectorStatus();
+                String serialized = null;
+                try {
+                    serialized = status.serialize();
+                } catch (IOException e) {
+                    System.err.println("Error");
+                }
+                reply.setContent(serialized);
+                myAgent.send(reply);
             }
-
-            reply.setContent(serialized);
-
-            myAgent.send(reply);
         }
 
     }

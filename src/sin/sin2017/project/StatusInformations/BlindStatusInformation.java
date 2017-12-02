@@ -32,22 +32,19 @@ public class BlindStatusInformation extends CyclicBehaviour {
         ACLMessage msg = myAgent.receive(mt);
         if (msg != null) {
 
-            ACLMessage reply = msg.createReply();
-
-            reply.setPerformative(ACLMessage.INFORM);
-
-            BlindStatus status = agent.getBlindStatus();
-            String serialized = null;
-
-            try {
-                serialized = status.serialize();
-            } catch (IOException e) {
-                System.err.println("Error");
+            if(msg.getLanguage() != Constants.NON_REPLY) {
+                ACLMessage reply = msg.createReply();
+                reply.setPerformative(ACLMessage.INFORM);
+                BlindStatus status = agent.getBlindStatus();
+                String serialized = null;
+                try {
+                    serialized = status.serialize();
+                } catch (IOException e) {
+                    System.err.println("Error");
+                }
+                reply.setContent(serialized);
+                myAgent.send(reply);
             }
-
-            reply.setContent(serialized);
-
-            myAgent.send(reply);
         }
 
     }
