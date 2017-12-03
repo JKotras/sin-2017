@@ -19,6 +19,7 @@ public class LightAgent extends Agent {
     @Override
     protected void setup() {
         super.setup();
+        setLightsByStatus();
         addBehaviour(new LightStatusInfomations());
         addBehaviour(new LightMessages());
     }
@@ -28,12 +29,37 @@ public class LightAgent extends Agent {
     }
 
     public void setLightsByStatus(){
+        if(motionSensorStatus != null){
+            if(motionSensorStatus.isThereAnyone){
+                lightsStatus.lightBlackboardStatus = Constants.LIGHT_TURN_ON;
+                lightsStatus.lightMiddleStatus = Constants.LIGHT_TURN_ON;
+                lightsStatus.lightWindowsStatus = Constants.LIGHT_TURN_ON;
+            }else{
+                lightsStatus.lightBlackboardStatus = Constants.LIGHT_TURN_OFF;
+                lightsStatus.lightMiddleStatus = Constants.LIGHT_TURN_OFF;
+                lightsStatus.lightWindowsStatus = Constants.LIGHT_TURN_OFF;
+            }
+        }
+        if(projectorStatus != null){
+            if(projectorStatus.status.compareTo(Constants.LIGHT_TURN_ON) == 0){
+                lightsStatus.lightBlackboardStatus = Constants.LIGHT_TURN_OFF;
+            }
+        }
+        if(lightLevelStatus != null){
+            if(lightLevelStatus.percentageOfSun <= Constants.LIGHT_LEVEL_TO_LOW_SUN){
+                lightsStatus.lightBlackboardStatus = Constants.LIGHT_TURN_ON;
+                lightsStatus.lightMiddleStatus = Constants.LIGHT_TURN_ON;
+                lightsStatus.lightWindowsStatus = Constants.LIGHT_TURN_ON;
+            }
+        }
+
         try {
             ChangeState changeState = new ChangeState();
-            this.lightsStatus.lightWindowsStatus = Constants.LIGHT_TURN_ON;
-            changeState.turnSwitch(Integer.parseInt(Constants.LIGHT_MIDDLE_ID), Constants.LIGHT_TURN_ON);
+            changeState.turnSwitch(Integer.parseInt(Constants.LIGHT_WINDOW_ID), lightsStatus.lightWindowsStatus);
+            changeState.turnSwitch(Integer.parseInt(Constants.LIGHT_MIDDLE_ID), lightsStatus.lightMiddleStatus);
+            changeState.turnSwitch(Integer.parseInt(Constants.LIGHT_BLACKBOARD_ID), lightsStatus.lightBlackboardStatus);
         }catch (Exception e){
-            System.err.println("Set state faild");
+            System.err.println("Lights - set state faild");
         }
     }
 }

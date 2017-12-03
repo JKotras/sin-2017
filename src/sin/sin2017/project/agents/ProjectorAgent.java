@@ -9,6 +9,7 @@ import sin.sin2017.project.Status.*;
 import sin.sin2017.project.StatusInformations.BlindStatusInformation;
 import sin.sin2017.project.StatusInformations.ProjectorStatusInformation;
 import sin.sin2017.project.agents.messages.ProjectorMessages;
+import sin.sin2017.project.domoticz.ChangeState;
 
 public class ProjectorAgent extends Agent{
     protected ProjectorStatus projectorStatus = new ProjectorStatus();
@@ -45,6 +46,16 @@ public class ProjectorAgent extends Agent{
     }
 
     public void setProjectorByStatus(){
+        if(timeStatus != null) {
+            if (timeStatus.getPartOfDay().compareTo(TimeStatus.NIGHT) == 0) {
+                try {
+                    ChangeState changeState = new ChangeState();
+                    changeState.turnSwitch(Integer.parseInt(Constants.PROJECTOR_ID), Constants.LIGHT_TURN_OFF);
+                } catch (Exception e) {
+                    System.err.println("turn off projector faild");
+                }
 
+            }
+        }
     }
 }

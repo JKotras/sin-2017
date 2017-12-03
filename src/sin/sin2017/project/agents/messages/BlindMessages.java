@@ -25,7 +25,7 @@ public class BlindMessages extends CyclicBehaviour{
                     agent.projectorStatus = projectorStatus;
                     agent.setBlindsByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Blind - parse message faild");
                 }
             }
             if(msg.getSender().getLocalName().compareTo("LightLevelAgent") == 0){
@@ -35,7 +35,7 @@ public class BlindMessages extends CyclicBehaviour{
                     agent.lightLevelStatus = lightLevelStatus;
                     agent.setBlindsByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Blind - parse message faild");
                 }
             }
             if(msg.getLanguage() != Constants.NON_REPLY) {

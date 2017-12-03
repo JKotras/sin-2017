@@ -20,6 +20,7 @@ public class TimeInfoBehaviour extends CyclicBehaviour{
             ChangeState changeState = new ChangeState();
             changeState.setText(Integer.parseInt(Constants.TIME_ELEMENT_ID), time);
         }catch (Exception $e){
+            dayAgent.doDelete();
             System.err.println("Fail to write into domoticz");
         }
     }

@@ -29,7 +29,7 @@ public class ProjectorMessages extends CyclicBehaviour{
                     agent.motionSensorStatus = motionSensorStatus;
                     agent.setProjectorByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Projector - parse message faild");
                 }
             }
             if(msg.getSender().getLocalName().compareTo("LightLevelAgent") == 0){
@@ -39,7 +39,8 @@ public class ProjectorMessages extends CyclicBehaviour{
                     agent.lightLevelStatus = lightLevelStatus;
                     agent.setProjectorByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println(e.toString());
+                    System.err.println("Projector - parse message faild");
                 }
             }
             if(msg.getSender().getLocalName().compareTo("DayAgent") == 0){
@@ -49,7 +50,7 @@ public class ProjectorMessages extends CyclicBehaviour{
                     agent.timeStatus = timeStatus;
                     agent.setProjectorByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Projector - parse message faild");
                 }
             }
             if(msg.getLanguage() != Constants.NON_REPLY) {

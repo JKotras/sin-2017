@@ -23,6 +23,7 @@ public class TemperatureStatusInformation extends CyclicBehaviour {
             System.out.println(temp);
         }catch (Exception e){
             System.err.println("Error in read status");
+            agent.doDelete();
         }
 
         //set it into lights statuses

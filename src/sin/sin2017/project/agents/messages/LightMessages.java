@@ -26,7 +26,7 @@ public class LightMessages extends CyclicBehaviour{
                     lightAgent.projectorStatus = projectorStatus;
                     lightAgent.setLightsByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Lights - parse message faild");
                 }
             }
             if(msg.getSender().getLocalName().compareTo("MotionSensorAgent") == 0){
@@ -36,7 +36,7 @@ public class LightMessages extends CyclicBehaviour{
                     lightAgent.motionSensorStatus = motionSensorStatus;
                     lightAgent.setLightsByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Lights - parse message faild");
                 }
             }
             if(msg.getSender().getLocalName().compareTo("DayAgent") == 0){
@@ -46,7 +46,7 @@ public class LightMessages extends CyclicBehaviour{
                     lightAgent.timeStatus = timeStatus;
                     lightAgent.setLightsByStatus();
                 }catch (Exception e){
-                    System.err.println("parse message faild");
+                    System.err.println("Lights - parse message faild");
                 }
             }
             if(msg.getSender().getLocalName().compareTo("LightLevelAgent") == 0){

@@ -26,6 +26,7 @@ public class LightStatusInfomations extends CyclicBehaviour {
             status = readJson.getSwitchState(Integer.parseInt(Constants.LIGHT_WINDOW_ID));
             lightsStatus.lightWindowsStatus = status;
         }catch (Exception e){
+            lightAgent.doDelete();
             System.err.println("Error in read status");
         }
     }

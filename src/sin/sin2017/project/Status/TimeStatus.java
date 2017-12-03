@@ -9,7 +9,7 @@ public class TimeStatus implements Serializable{
     public static String EVENING = "evening";
     public static String NIGHT = "night";
 
-    protected int numOfSeconds = 42000;
+    protected int numOfSeconds = 70000;
     public static int numbOfSecondsPerDay = 86400;
 
     public int getNumOfSeconds() {

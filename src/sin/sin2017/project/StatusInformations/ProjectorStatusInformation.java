@@ -28,6 +28,7 @@ public class ProjectorStatusInformation extends CyclicBehaviour {
             }
         }catch (Exception e){
             System.err.println("Error in read status");
+            agent.doDelete();
         }
         if(agent.getProjectorStatus().status.compareTo(tempStatus) != 0){
             agent.infoOthersProjectorChange();

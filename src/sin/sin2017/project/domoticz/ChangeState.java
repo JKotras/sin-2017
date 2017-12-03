@@ -34,14 +34,14 @@ public class ChangeState {
     // just for testing purposes
     public ChangeState() throws Exception{
        // String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=" + idx + "&switchcmd=" + action;
-        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=20&switchcmd=Off";
-
-//        System.out.print("URL: " + rUrl + "\n");
-
-        String checkResult = readUrl(rUrl);
-
-        Gson gson = new Gson();
-        Response response = gson.fromJson(checkResult, Response.class);
+//        String rUrl = httpPort + "/json.htm?type=command&param=switchlight&idx=20&switchcmd=Off";
+//
+////        System.out.print("URL: " + rUrl + "\n");
+//
+//        String checkResult = readUrl(rUrl);
+//
+//        Gson gson = new Gson();
+//        Response response = gson.fromJson(checkResult, Response.class);
 
 //        System.out.print("RESPONSE: " + response + "\n");
 //        System.out.println("status: " + response.status + "\n");
