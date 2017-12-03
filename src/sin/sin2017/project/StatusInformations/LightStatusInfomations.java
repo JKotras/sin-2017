@@ -28,28 +28,5 @@ public class LightStatusInfomations extends CyclicBehaviour {
         }catch (Exception e){
             System.err.println("Error in read status");
         }
-
-        //replay for requests
-        MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
-        ACLMessage msg = myAgent.receive(mt);
-        if (msg != null) {
-            System.out.println("tady" + msg.getContent());
-
-
-            if(msg.getLanguage() != Constants.NON_REPLY) {
-                ACLMessage reply = msg.createReply();
-                reply.setPerformative(ACLMessage.INFORM);
-                LightsStatus status = lightAgent.getLightsStatus();
-                String serialized = null;
-                try {
-                    serialized = status.serialize();
-                } catch (IOException e) {
-                    System.err.println("Error in replay");
-                }
-                reply.setContent(serialized);
-                myAgent.send(reply);
-            }
-        }
-
     }
 }

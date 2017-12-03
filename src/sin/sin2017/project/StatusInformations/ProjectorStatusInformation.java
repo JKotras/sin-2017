@@ -28,26 +28,5 @@ public class ProjectorStatusInformation extends CyclicBehaviour {
         }catch (Exception e){
             System.err.println("Error in read status");
         }
-
-        //replay for requests
-        MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
-        ACLMessage msg = myAgent.receive(mt);
-        if (msg != null) {
-
-            if(msg.getLanguage() != Constants.NON_REPLY) {
-                ACLMessage reply = msg.createReply();
-                reply.setPerformative(ACLMessage.INFORM);
-                ProjectorStatus status = agent.getProjectorStatus();
-                String serialized = null;
-                try {
-                    serialized = status.serialize();
-                } catch (IOException e) {
-                    System.err.println("Error");
-                }
-                reply.setContent(serialized);
-                myAgent.send(reply);
-            }
-        }
-
     }
 }
