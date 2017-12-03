@@ -22,8 +22,7 @@ public class BlindStatusInformation extends CyclicBehaviour {
             agent.getBlindStatus().percentageOfClose = percentage;
         }catch (Exception e){
             agent.getBlindStatus().percentageOfClose = 0;
-            System.err.println("Error in read status");
+            //System.err.println("Error in read status");
         }
-
     }
 }

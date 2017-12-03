@@ -5,15 +5,16 @@ import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import sin.sin2017.project.Constants;
-import sin.sin2017.project.Status.BlindStatus;
-import sin.sin2017.project.Status.ProjectorStatus;
+import sin.sin2017.project.Status.*;
 import sin.sin2017.project.StatusInformations.BlindStatusInformation;
 import sin.sin2017.project.StatusInformations.ProjectorStatusInformation;
 import sin.sin2017.project.agents.messages.ProjectorMessages;
 
 public class ProjectorAgent extends Agent{
     protected ProjectorStatus projectorStatus = new ProjectorStatus();
-
+    public MotionSensorStatus motionSensorStatus;
+    public LightLevelStatus lightLevelStatus;
+    public TimeStatus timeStatus;
     @Override
     protected void setup() {
         super.setup();
@@ -25,7 +26,7 @@ public class ProjectorAgent extends Agent{
         return projectorStatus;
     }
 
-    public void infoOthersMotionChange(){
+    public void infoOthersProjectorChange(){
         addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
@@ -41,5 +42,9 @@ public class ProjectorAgent extends Agent{
                 }
             }
         });
+    }
+
+    public void setProjectorByStatus(){
+
     }
 }

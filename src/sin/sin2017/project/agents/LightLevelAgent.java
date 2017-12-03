@@ -5,36 +5,36 @@ import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import sin.sin2017.project.Constants;
-import sin.sin2017.project.Status.MotionSensorStatus;
-import sin.sin2017.project.StatusInformations.MotionSensorStatusInformation;
-import sin.sin2017.project.agents.messages.MotionMessages;
+import sin.sin2017.project.Status.LightLevelStatus;
 
-public class MotionSensorAgent extends Agent{
-    protected MotionSensorStatus motionSensorStatus = new MotionSensorStatus();
+import sin.sin2017.project.StatusInformations.LightLevelStatusInformations;
+
+
+public class LightLevelAgent extends Agent{
+    protected LightLevelStatus lightLevelStatus = new LightLevelStatus();
 
     @Override
     protected void setup() {
         super.setup();
-        addBehaviour(new MotionSensorStatusInformation());
-        addBehaviour(new MotionMessages());
+        addBehaviour(new LightLevelStatusInformations());
     }
 
-    public MotionSensorStatus getMotionSensorStatus() {
-        return motionSensorStatus;
+    public LightLevelStatus getLightLevelStatus() {
+        return lightLevelStatus;
     }
 
-    public void infoOthersMotionChange(){
+    public void infoOthersLightLevelChange(){
         addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
                 try {
                     ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
                     request.addReceiver(new AID("LightAgent", AID.ISLOCALNAME));
+                    request.addReceiver(new AID("BlindAgent", AID.ISLOCALNAME));
                     request.addReceiver(new AID("ProjectorAgent", AID.ISLOCALNAME));
-                    request.setContent(motionSensorStatus.serialize());
+                    request.setContent(lightLevelStatus.serialize());
                     request.setLanguage(Constants.NON_REPLY);
                     myAgent.send(request);
-
                 }catch (Exception e){
                     System.err.println("send message faild");
                 }

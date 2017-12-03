@@ -11,8 +11,8 @@ public class WorldAgent extends jade.core.Agent {
 
     protected readJson xRead;
     protected ChangeState xState;
-    //default 1000000 - that mean 1 second = 1000000 microseconds;
-    public static long TIMESPEED = 10000;
+    //default 1000 - that mean 1 second = 1000 miliseconds;
+    public static long TIMESPEED = 1;
     protected AgentContainer agentsContainer;
 
     @Override
@@ -43,6 +43,9 @@ public class WorldAgent extends jade.core.Agent {
             agent.start();
             //motionSensorAgent
             agent = agentsContainer.createNewAgent("MotionSensorAgent", MotionSensorAgent.class.getCanonicalName(), null);
+            agent.start();
+            //lightlevelAgent
+            agent = agentsContainer.createNewAgent("LightLevelAgent", LightLevelAgent.class.getCanonicalName(), null);
             agent.start();
             //temperature - not fully implemented
 //            agent = agentsContainer.createNewAgent("TemperatureAgent", TemperatureAgent.class.getCanonicalName(), null);

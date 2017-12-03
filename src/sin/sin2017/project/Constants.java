@@ -17,5 +17,7 @@ public interface Constants {
 
     public static final String TEMPERATURE_SENSOR_ID = "24";
 
+    public static final String LIGHT_LEVEL_SENSOR_ID = "31";
+
     public static final String NON_REPLY = "no-reply";
 }

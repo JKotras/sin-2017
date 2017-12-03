@@ -16,6 +16,7 @@ public class ProjectorStatusInformation extends CyclicBehaviour {
     @Override
     public void action() {
         ProjectorAgent agent = (ProjectorAgent) myAgent;
+        String tempStatus = agent.getProjectorStatus().status;
         try{
             readJson readJson = new readJson();
             String status = readJson.getSwitchState(Integer.parseInt(Constants.PROJECTOR_ID));
@@ -27,6 +28,9 @@ public class ProjectorStatusInformation extends CyclicBehaviour {
             }
         }catch (Exception e){
             System.err.println("Error in read status");
+        }
+        if(agent.getProjectorStatus().status.compareTo(tempStatus) != 0){
+            agent.infoOthersProjectorChange();
         }
     }
 }

@@ -29,7 +29,6 @@ public class MotionSensorStatusInformation extends CyclicBehaviour {
             System.err.println("Error in read status");
         }
         if(inState != agent.getMotionSensorStatus().isThereAnyone){
-            System.out.println("change");
             agent.infoOthersMotionChange();
         }
     }

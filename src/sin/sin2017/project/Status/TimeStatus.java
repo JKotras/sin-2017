@@ -9,7 +9,7 @@ public class TimeStatus implements Serializable{
     public static String EVENING = "evening";
     public static String NIGHT = "night";
 
-    protected int numOfSeconds = 0;
+    protected int numOfSeconds = 42000;
     public static int numbOfSecondsPerDay = 86400;
 
     public int getNumOfSeconds() {
@@ -62,7 +62,9 @@ public class TimeStatus implements Serializable{
             return TimeStatus.NIGHT;
         }else if(this.numOfSeconds >= 21600 && this.numOfSeconds < 43200){
             return TimeStatus.MORNING;
-        }else if(this.numOfSeconds >= 43200 && this.numOfSeconds < 72000){
+        }else if(this.numOfSeconds >= 43200 && this.numOfSeconds < 64800){
+            return TimeStatus.AFTERNOON;
+        }else if(this.numOfSeconds >= 64800 && this.numOfSeconds < 75600) {
             return TimeStatus.EVENING;
         }else{
             return TimeStatus.NIGHT;
